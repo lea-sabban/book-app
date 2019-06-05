@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import Book from "./../../services/books";
 import CardGridView from "./../CardView";
 import {
   Input,
@@ -45,7 +45,7 @@ class App extends Component {
   };
 
   componentWillMount() {
-    this._refreshBooks();
+    Book.refreshBooks();
   }
   toggleNewBookModal() {
     this.setState({
@@ -58,65 +58,6 @@ class App extends Component {
     });
   }
 
-  detailBook(book) {
-    console.log(book);
-  }
-
-  addBook() {
-    axios
-      .post("http://localhost:3000/books", this.state.newBookData)
-      .then(response => {
-        let { books } = this.state;
-
-        books.push(response.data);
-
-        this.setState({
-          books,
-          newBookModal: false,
-          newBookData: {
-            title: "",
-            rating: ""
-          }
-        });
-      });
-  }
-  updateBook() {
-    let { title, rating } = this.state.editBookData;
-
-    axios
-      .put("http://localhost:3000/books/" + this.state.editBookData.id, {
-        title,
-        rating
-      })
-      .then(response => {
-        this._refreshBooks();
-
-        this.setState({
-          editBookModal: false,
-          editBookData: { id: "", title: "", rating: "" }
-        });
-      });
-  }
-  editBook(book) {
-    const { id, title, rating } = book;
-    this.setState({
-      editBookData: { id, title, rating },
-      editBookModal: !this.state.editBookModal
-    });
-  }
-  deleteBook(book) {
-    const { id } = book;
-    // axios.delete("http://localhost:3000/books/" + id).then(response => {
-    //   this._refreshBooks();
-    // });
-  }
-  _refreshBooks() {
-    axios.get("http://localhost:3000/books").then(response => {
-      this.setState({
-        books: response.data
-      });
-    });
-  }
   render() {
     let books = this.state.books.map(book => {
       return (
@@ -138,7 +79,7 @@ class App extends Component {
             >
               Edit
             </Button>
-            <Button color="danger" size="sm" onClick={this.deleteBook(book)}>
+            <Button color="danger" size="sm" onClick={Book.deleteBook(book)}>
               Delete
             </Button>
           </td>
@@ -154,8 +95,8 @@ class App extends Component {
         <h1>Books App</h1>
         <CardGridView
           data={this.state.books}
-          onEdit={book => this.editBook(book)}
-          onViewDetail={book => this.detailBook(book)}
+          onEdit={book => Book.editBook(book)}
+          onViewDetail={book => Book.detailBook(book)}
         />
 
         <Button
@@ -254,7 +195,7 @@ class App extends Component {
             </FormGroup>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.updateBook.bind(this)}>
+            <Button color="primary" onClick={Book.updateBook.bind(this)}>
               Update Book
             </Button>{" "}
             <Button
