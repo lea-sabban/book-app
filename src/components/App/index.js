@@ -72,24 +72,41 @@ class App extends Component {
       newBookModal: !this.state.newBookModal
     });
   }
-  addBook() {
-    axios
-      .post("http://localhost:3000/books", this.state.newBookData)
-      .then(response => {
-        let { books } = this.state;
+  // addBook() {
+  //   axios
+  //     .post("http://localhost:3000/books", this.state.newBookData)
+  //     .then(response => {
+  //       let { books } = this.state;
 
-        books.push(response.data);
+  //       books.push(response.data);
 
-        this.setState({
-          books,
-          newBookModal: false,
-          newBookData: {
-            title: "",
-            rating: ""
-          }
-        });
-      });
-  }
+  //       this.setState({
+  //         books,
+  //         newBookModal: false,
+  //         newBookData: {
+  //           title: "",
+  //           rating: ""
+  //         }
+  //       });
+  //     });
+  // }
+
+  addBook(this.state.newBookData).then(newBookData => {
+
+    let { books } = this.state;
+  
+    books.push(response.data);
+  
+    this.setState({
+      books,
+      newBookModal: false,
+      newBookData: {
+        title: "",
+        rating: ""
+      }
+    });
+  
+  });
   updateBook() {
     let { title, rating } = this.state.editBookData;
 
