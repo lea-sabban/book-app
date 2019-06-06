@@ -1,7 +1,0 @@
-{
-  "books": [
-    { "id": 1, "title": "hello world", "author": "lea" },
-    { "id": 2, "title": "hello world2", "author": "lea2" },
-    { "id": 3, "title": "hello world3", "author": "lea3" }
-  ]
-}
