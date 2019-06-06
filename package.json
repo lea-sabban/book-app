@@ -33,6 +33,7 @@
     ]
   },
   "devDependencies": {
+    "@material-ui/icons": "^4.0.1",
     "@reach/router": "^1.2.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.2",
