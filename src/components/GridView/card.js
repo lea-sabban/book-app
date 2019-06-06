@@ -22,7 +22,6 @@ class Card extends React.Component {
   }
 
   render() {
-    console.log(this.props.data);
     const { title, author } = this.props.data;
 
     return (

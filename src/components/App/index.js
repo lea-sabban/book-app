@@ -1,22 +1,24 @@
 import React, { Component } from "react";
 import { addBook } from "./../../services/books";
+import AppBar from "@material-ui/core/AppBar";
+import Button from "@material-ui/core/Button";
+import CameraIcon from "@material-ui/icons/PhotoCamera";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Grid from "@material-ui/core/Grid";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
 import GridView from "./../GridView";
 import axios from "axios";
 import ListView from "./../ListView";
 import ModalAdd from "./../ModalAdd";
 import "./../../css/index.css";
 import { navigate } from "@reach/router";
-import {
-  Input,
-  FormGroup,
-  Label,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Table,
-  Button
-} from "reactstrap";
 
 import { render } from "react-dom";
 import { Router, Link } from "@reach/router";
@@ -72,24 +74,6 @@ class App extends Component {
       newBookModal: !this.state.newBookModal
     });
   }
-  // addBook() {
-  //   axios
-  //     .post("http://localhost:3000/books", this.state.newBookData)
-  //     .then(response => {
-  //       let { books } = this.state;
-
-  //       books.push(response.data);
-
-  //       this.setState({
-  //         books,
-  //         newBookModal: false,
-  //         newBookData: {
-  //           title: "",
-  //           rating: ""
-  //         }
-  //       });
-  //     });
-  // }
 
   updateBook() {
     let { title, rating } = this.state.editBookData;
@@ -148,6 +132,48 @@ class App extends Component {
   };
 
   render() {
+    const useStyles = makeStyles(theme => ({
+      icon: {
+        marginRight: theme.spacing(2)
+      },
+      heroContent: {
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(8, 0, 6)
+      },
+      heroButtons: {
+        marginTop: theme.spacing(4)
+      },
+      cardGrid: {
+        paddingTop: theme.spacing(8),
+        paddingBottom: theme.spacing(8)
+      },
+      card: {
+        height: "100%",
+        display: "flex",
+        flexDirection: "column"
+      },
+      cardMedia: {
+        paddingTop: "56.25%" // 16:9
+      },
+      cardContent: {
+        flexGrow: 1
+      },
+      footer: {
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(6)
+      }
+    }));
+
+    const classes = useStyles();
+
+    <AppBar position="relative">
+      <Toolbar>
+        <CameraIcon className={classes.icon} />
+        <Typography variant="h6" color="inherit" noWrap>
+          Album layout
+        </Typography>
+      </Toolbar>
+    </AppBar>;
     let books = this.state.books.map(book => {
       return (
         <tr key={book.id}>

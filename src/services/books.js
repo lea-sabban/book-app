@@ -6,6 +6,15 @@ export const addBook = newBookData => {
     .then(response => response.data);
 };
 
+export const alphabeticOrder = nonSortedArray => {
+  var sortedArray = nonSortedArray.sort(function(a, b) {
+    if (a < b) return -1;
+    else if (a > b) return 1;
+    return 0;
+  });
+  console.log(sortedArray);
+};
+
 // export const addBook = (newBookData) => {
 //   return axios
 //     .post("http://localhost:3000/books", newBookData)
