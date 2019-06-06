@@ -91,22 +91,6 @@ class App extends Component {
   //     });
   // }
 
-  addBook(this.state.newBookData).then(newBookData => {
-
-    let { books } = this.state;
-  
-    books.push(response.data);
-  
-    this.setState({
-      books,
-      newBookModal: false,
-      newBookData: {
-        title: "",
-        rating: ""
-      }
-    });
-  
-  });
   updateBook() {
     let { title, rating } = this.state.editBookData;
 
@@ -147,6 +131,22 @@ class App extends Component {
     });
   }
 
+  handleClick = e => {
+    addBook(this.state.newBookData).then(newBookData => {
+      let { books } = this.state;
+      books.push(newBookData);
+
+      this.setState({
+        books,
+        newBookModal: false,
+        newBookData: {
+          title: "",
+          rating: ""
+        }
+      });
+    });
+  };
+
   render() {
     let books = this.state.books.map(book => {
       return (
@@ -179,6 +179,7 @@ class App extends Component {
         </tr>
       );
     });
+
     console.log(this.state.books);
     return (
       <div className="App container">
@@ -195,7 +196,7 @@ class App extends Component {
         <Button
           className="my-3"
           color="primary"
-          onClick={() => this.toggleNewBookModal()}
+          onClick={() => this.handleClick()}
         >
           Add Book
         </Button>
