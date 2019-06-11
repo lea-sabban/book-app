@@ -14,7 +14,7 @@ describe("card", function() {
     };
     const onEdit = jest.fn();
 
-    const wrapper = shallow(<Card color="#000" onEdit={onEdit} data={book} />);
+    const wrapper = shallow(<Card onEdit={onEdit} data={book} />);
     const button = wrapper.find(".edit");
     expect(button.length).toEqual(1);
 

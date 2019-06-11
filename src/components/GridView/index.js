@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import Card from "./card";
+import CardView from "./card";
 
-class GridView extends React.Component {
+class GridView extends Component {
   render() {
     return (
       <div className="card-grid-view">
         {this.props.data.map((cardData, index) => (
-          <Card
+          <CardView
             onViewDetail={this.props.onViewDetail}
             data={cardData}
             onDelete={this.props.onDelete}
